@@ -1,0 +1,21 @@
+#!/usr/bin/env perl
+#
+# (c) Jan Gehring <jan.gehring@gmail.com>
+# 
+# vim: set ts=2 sw=2 tw=0:
+# vim: set expandtab:
+   
+use strict;
+use warnings;
+
+use FindBin;
+
+use lib "$FindBin::Bin/../lib";
+
+use Rex::Drone;
+use Rex::Drone::RPC;
+
+my $rpc   = Rex::Drone::RPC->create("Rex::Drone::RPC::JSON");
+my $drone = Rex::Drone->new(rpc => $rpc);
+$drone->run;
+
