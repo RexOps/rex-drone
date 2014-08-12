@@ -4,15 +4,18 @@
 # vim: set ts=2 sw=2 tw=0:
 # vim: set expandtab:
    
-package Rex::Drone::Exec;
+package Rex::Drone::RPC::Exec;
    
 use strict;
 use warnings;
+
+use Rex::Drone::RPC::Base;
+use base qw(Rex::Drone::RPC::Base);
    
 sub new {
   my $that = shift;
   my $proto = ref($that) || $that;
-  my $self = { @_ };
+  my $self = $proto->SUPER::new(@_);
 
   bless($self, $proto);
 
@@ -32,6 +35,5 @@ sub exec {
   return \@output;
 }
 
-sub app { (shift)->{app}; };
 
 1;

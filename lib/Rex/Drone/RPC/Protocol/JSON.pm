@@ -20,13 +20,13 @@
 #    {"status": 500, "error": "error description"}
 #
 #
-package Rex::Drone::RPC::JSON;
+package Rex::Drone::RPC::Protocol::JSON;
 
 use strict;
 use warnings;
 
-use Rex::Drone::RPC::Base;
-use base 'Rex::Drone::RPC::Base';
+use Rex::Drone::RPC::Protocol::Base;
+use base 'Rex::Drone::RPC::Protocol::Base';
 use JSON::PP;
 
 sub new {

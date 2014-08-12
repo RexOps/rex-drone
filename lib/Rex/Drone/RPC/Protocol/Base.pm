@@ -4,11 +4,11 @@
 # vim: set ts=2 sw=2 tw=0:
 # vim: set expandtab:
    
-package Rex::Drone::RPC::Base;
+package Rex::Drone::RPC::Protocol::Base;
    
 use strict;
 use warnings;
-   
+
 sub new {
   my $that = shift;
   my $proto = ref($that) || $that;
@@ -17,6 +17,11 @@ sub new {
   bless($self, $proto);
 
   return $self;
+}
+
+sub set_app {
+  my ($self, $app) = @_;
+  $self->{app} = $app;
 }
 
 sub app { (shift)->{app}; };

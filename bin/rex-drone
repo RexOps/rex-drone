@@ -15,7 +15,7 @@ use lib "$FindBin::Bin/../lib";
 use Rex::Drone;
 use Rex::Drone::RPC;
 
-my $rpc   = Rex::Drone::RPC->create("Rex::Drone::RPC::JSON");
+my $rpc   = Rex::Drone::RPC->create("Rex::Drone::RPC::Protocol::JSON");
 my $drone = Rex::Drone->new(rpc => $rpc);
 $drone->run;
 

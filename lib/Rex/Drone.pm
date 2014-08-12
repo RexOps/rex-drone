@@ -9,6 +9,8 @@ package Rex::Drone;
 use strict;
 use warnings;
 
+use Rex::Drone::FileManager;
+
 sub new {
   my $that  = shift;
   my $proto = ref($that) || $that;
@@ -18,11 +20,13 @@ sub new {
 
   open($self->{log}, ">>", "/tmp/drone.log");
   $self->rpc->set_app($self);
+  $self->{__file_manager__} = Rex::Drone::FileManager->new;
 
   return $self;
 }
 
 sub rpc { (shift)->{rpc}; }
+sub filemanager { (shift)->{__file_manager__}; }
 
 sub run {
   my ($self) = @_;
