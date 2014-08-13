@@ -11,6 +11,8 @@ use warnings;
 
 use Rex::Drone::RPC::Base;
 use base qw(Rex::Drone::RPC::Base);
+
+use Rex::Drone::Base64;
    
 sub new {
   my $that = shift;
@@ -42,7 +44,7 @@ sub read {
 
 sub write {
   my ($self, $file, $buf) = @_;
-  my $ret = { write => $self->app->filemanager->write($file, $buf) };
+  my $ret = { write => $self->app->filemanager->write($file, decode_base64($buf)) };
   return $ret;
 }
 

@@ -82,6 +82,8 @@ sub close {
   }
 
   $self->{$key}->{$file}->close;
+
+  delete $self->{$key}->{$file};
 }
    
 1;
