@@ -81,9 +81,11 @@ sub close {
     die "Error closing $file. Filehandle not open.";
   }
 
-  $self->{$key}->{$file}->close;
+  my $ret = $self->{$key}->{$file}->close;
 
   delete $self->{$key}->{$file};
+
+  return $ret;
 }
    
 1;

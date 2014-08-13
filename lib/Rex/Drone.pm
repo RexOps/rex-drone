@@ -18,7 +18,6 @@ sub new {
 
   bless( $self, $proto );
 
-  open($self->{log}, ">>", "/tmp/drone.log");
   $self->rpc->set_app($self);
   $self->{__file_manager__} = Rex::Drone::FileManager->new;
 
@@ -33,10 +32,8 @@ sub run {
 
 
   while ( my $line = <STDIN> ) {
-    $self->log->say($line);
     $line =~ s/[\r\n]//gms;
     my $response = $self->rpc->parse($line);
-    $self->log->say("Responding: $response");
     STDOUT->say($response);
     STDOUT->flush;
   }
@@ -46,7 +43,5 @@ sub exit_app {
   my ($self) = @_;
   exit;
 }
-
-sub log { (shift)->{log}; }
 
 1;

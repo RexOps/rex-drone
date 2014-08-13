@@ -25,12 +25,8 @@ sub new {
 sub exec {
   my ($self, $command) = @_;
 
-  $self->app->log->say("Executing: <$command>");
-
   my @output = qx{$command};
   chomp @output;
-
-  $self->app->log->say("Got in return: @output");
 
   return \@output;
 }

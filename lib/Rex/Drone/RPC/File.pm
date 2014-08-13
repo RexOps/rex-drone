@@ -12,6 +12,8 @@ use warnings;
 use Rex::Drone::RPC::Base;
 use base qw(Rex::Drone::RPC::Base);
 
+use Rex::Drone::Base64;
+
 sub new {
   my $that = shift;
   my $proto = ref($that) || $that;

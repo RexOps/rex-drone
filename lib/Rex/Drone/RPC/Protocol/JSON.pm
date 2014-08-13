@@ -44,13 +44,9 @@ sub new {
 sub parse {
   my ( $self, $req ) = @_;
 
-  $self->app->log->say("Got request: $req");
-
   my ( $ref, $res );
   eval {
     $ref = $self->json->decode($req);
-    $self->app->log->say("Parsed request");
-    $self->app->log->say($self->json->encode($ref));
 
     my $pkg_to_use   = $ref->{pkg};
     my $func_to_call = $ref->{func};
@@ -58,8 +54,6 @@ sub parse {
 
     eval "use $pkg_to_use";
     die "Error finding package $pkg_to_use." if $@;
-
-    $self->app->log->say("Loaded execution class.");
 
     my $pkg      = $pkg_to_use->new(app => $self->app);
     my $res_func = $pkg->$func_to_call(@args);
@@ -69,12 +63,8 @@ sub parse {
       response => $res_func,
     };
 
-    $self->app->log->say("Got return value:");
-    $self->app->log->say($self->json->encode($res));
-
     1;
   } or do {
-    $self->app->log->say("error: $@");
     $res = { status => 500, error => $@ };
   };
 
