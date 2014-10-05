@@ -28,7 +28,19 @@ sub open {
 
   my $key = "__file_handle__";
 
-  $self->{$key}->{$file} = IO::File->new($file, $mode);
+  my $r_mode;
+  
+  if($mode eq "<") {
+    $r_mode = "r";
+  }
+  elsif($mode eq ">") {
+    $r_mode = "w";
+  }
+  elsif($mode eq ">>") {
+    $r_mode = "a";
+  }
+
+  $self->{$key}->{$file} = IO::File->new($file, $r_mode);
   $self->{$key}->{$file}->binmode;
 
   return "$key-$file";
